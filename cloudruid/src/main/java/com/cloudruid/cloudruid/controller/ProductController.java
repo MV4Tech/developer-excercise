@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/api/v1/product")
 public class ProductController {
 
+
     private final ProductService productService;
 
     @PostMapping("/add-product")
@@ -23,17 +24,11 @@ public class ProductController {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @PatchMapping("/add-quantity/{id}")
-    public ResponseEntity<Void> addQuantity(@PathVariable Long id, @RequestBody UpdateQuantityRequest request) {
-        productService.addQuantity(id, request);
-        return ResponseEntity.status(HttpStatus.OK).build();
-    }
 
     @DeleteMapping
     public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
         productService.deleteProduct(id);
         return ResponseEntity.noContent().build();
     }
-
 
 }

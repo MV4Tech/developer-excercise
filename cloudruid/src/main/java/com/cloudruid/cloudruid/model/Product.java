@@ -29,10 +29,4 @@ public class Product {
     @NotNull(message = "Price cannot be null")
     @Min(value = 0, message = "Price cannot be negative")
     private Integer cloud;
-
-    @Column
-    @Min(value = 0, message = "Price cannot be negative")
-    @NotNull(message = "Quantity cannot be null")
-    private Integer quantity;
-
 }

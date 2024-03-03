@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -27,13 +28,14 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void addQuantity(Long id, UpdateQuantityRequest request) {
-        Product product = getProductById(id);
-        product.setQuantity(request.getQuantity());
-        //updating the quantity status of the product
-        productRepository.save(product);
-        logger.info("Product quantity with id: "+ id +" updated successfully");
+    public List<Product> fetchAllProducts() {
+        List<Product> products = productRepository.findAll();
+        if (products.isEmpty()) {
+            throw new ProductNotFoundException("No products found");
+        }
+        return products;
     }
+
 
     @Override
     public Product getProductById(Long id) {

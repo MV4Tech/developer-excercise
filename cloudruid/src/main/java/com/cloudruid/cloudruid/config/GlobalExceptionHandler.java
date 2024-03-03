@@ -1,6 +1,7 @@
 package com.cloudruid.cloudruid.config;
 
 import com.cloudruid.cloudruid.exception.ProductNotFoundException;
+import com.cloudruid.cloudruid.exception.ProductNotSupportedByTheSystemException;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +26,15 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(getErrorsMap(errors), new HttpHeaders(), HttpStatus.NOT_FOUND);
     }
 
+    // handling product not supported by the system exception
+    @ExceptionHandler(ProductNotSupportedByTheSystemException.class)
+    public ResponseEntity<Map<String, List<String>>> handleProductNotSupportedByTheSystemException(ProductNotSupportedByTheSystemException ex) {
+        List<String> errors = Collections.singletonList(ex.getMessage());
+        return new ResponseEntity<>(getErrorsMap(errors), new HttpHeaders(), HttpStatus.NOT_FOUND);
+    }
 
+
+    // handling validation errors by the @Valid annotation
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, List<String>>> handleValidationErrors(MethodArgumentNotValidException ex){
         List<String> errors = ex.getBindingResult()
