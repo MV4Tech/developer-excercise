@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface ScannerService {
 
-    int scanWithDiscount(List<Product> inputProducts);
+    String scanWithAllDiscount(List<Product> inputProducts);
 
 
     String scanWithoutDiscount(List<Product> inputProducts);

@@ -1,7 +1,6 @@
 package com.cloudruid.cloudruid.controller;
 
 
-import com.cloudruid.cloudruid.dto.request.UpdateQuantityRequest;
 import com.cloudruid.cloudruid.model.Product;
 import com.cloudruid.cloudruid.service.ProductService;
 import jakarta.validation.Valid;

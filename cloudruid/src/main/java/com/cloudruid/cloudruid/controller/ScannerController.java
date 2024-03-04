@@ -18,9 +18,9 @@ public class ScannerController {
     private final ScannerService scannerService;
 
     // controller for scanning products with discount (take 3 pay 2 and take 1 for second half price)
-    @GetMapping("/scan-with-discount")
-    public int scanWithDiscount(@RequestBody List<Product> inputProducts){
-        return scannerService.scanWithDiscount(inputProducts);
+    @GetMapping("/scan-with-all-discount")
+    public String scanWithAllDiscount(@RequestBody List<Product> inputProducts){
+        return scannerService.scanWithAllDiscount(inputProducts);
     }
 
     // controller for scanning products with 3 for 2 discount only

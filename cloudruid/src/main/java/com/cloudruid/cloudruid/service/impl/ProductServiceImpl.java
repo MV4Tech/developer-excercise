@@ -1,6 +1,5 @@
 package com.cloudruid.cloudruid.service.impl;
 
-import com.cloudruid.cloudruid.dto.request.UpdateQuantityRequest;
 import com.cloudruid.cloudruid.exception.ProductNotFoundException;
 import com.cloudruid.cloudruid.model.Product;
 import com.cloudruid.cloudruid.repository.ProductRepository;
