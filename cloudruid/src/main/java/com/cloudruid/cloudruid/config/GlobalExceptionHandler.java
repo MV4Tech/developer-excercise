@@ -19,14 +19,23 @@ import java.util.stream.Collectors;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    // handling product not found exception
+    /**
+     * handling product not found exception
+     * @param  ex
+     * @return list of possible errors(set by the message) and http status not found
+     */
     @ExceptionHandler(ProductNotFoundException.class)
     public ResponseEntity<Map<String, List<String>>> handleProductNotFoundException(ProductNotFoundException ex) {
         List<String> errors = Collections.singletonList(ex.getMessage());
         return new ResponseEntity<>(getErrorsMap(errors), new HttpHeaders(), HttpStatus.NOT_FOUND);
     }
 
-    // handling product not supported by the system exception
+
+    /**
+     * handling product not supported by the system exception
+     * @param  ex
+     * @return list of possible errors(set by the message) and http status not found
+     */
     @ExceptionHandler(ProductNotSupportedByTheSystemException.class)
     public ResponseEntity<Map<String, List<String>>> handleProductNotSupportedByTheSystemException(ProductNotSupportedByTheSystemException ex) {
         List<String> errors = Collections.singletonList(ex.getMessage());
@@ -34,7 +43,11 @@ public class GlobalExceptionHandler {
     }
 
 
-    // handling validation errors by the @Valid annotation
+    /**
+     * handling validation errors sent by @Valid annotation
+     * @param  ex
+     * @return list of possible errors sent by @Valid annotation and http status bad request
+     */
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<Map<String, List<String>>> handleValidationErrors(MethodArgumentNotValidException ex){
         List<String> errors = ex.getBindingResult()
@@ -46,7 +59,11 @@ public class GlobalExceptionHandler {
     }
 
 
-    //returning a map of errors
+    /**
+     * method to create a map of errors
+     * @param errors
+     * @return map of errors
+     */
     private Map<String,List<String>> getErrorsMap(List<String> errors) {
         Map<String,List<String>> errorResponse = new HashMap<>();
         errorResponse.put("errors",errors);

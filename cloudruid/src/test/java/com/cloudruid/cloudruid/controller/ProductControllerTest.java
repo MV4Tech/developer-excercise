@@ -23,14 +23,21 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 @WebMvcTest(ProductController.class)
 public class ProductControllerTest {
 
+    /**
+     * The mock mvc
+     */
     @Autowired
     private MockMvc mockMvc;
 
-
+    /**
+     * The product service
+     */
     @MockBean
     private ProductService productService;
 
-
+    /**
+     * Test securing successfully adding product to the database
+     */
     @Test
     @DisplayName("Add product to the database(Controller)")
     public void addProduct() throws Exception {
@@ -51,6 +58,9 @@ public class ProductControllerTest {
 
     }
 
+    /**
+     * Test securing successfully deleting product from the database
+     */
     @Test
     @DisplayName("Delete product from the database(Controller)")
     public void deleteProduct() throws Exception {
@@ -67,7 +77,11 @@ public class ProductControllerTest {
 
     }
 
-//  asJsonString method is used to convert the input object into a JSON string
+    /**
+     * Convert object to json string
+     * @param object
+     * @return json string
+     */
     private String asJsonString(Object object) {
         try {
             return new ObjectMapper().writeValueAsString(object);

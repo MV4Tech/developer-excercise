@@ -16,18 +16,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 @WebMvcTest(ScannerController.class)
 public class ScannerControllerTest {
 
+    /**
+     * The mock mvc
+     */
     @Autowired
     private MockMvc mockMvc;
 
-
+    /**
+     * The scanner service
+     */
     @MockBean
     private ScannerService scannerService;
 
-
+    /**
+     * Test securing successfully sending post request to scan products without discount
+     */
     @Test
     @DisplayName("Scan products without discount (Controller)")
     public void scanWithoutDiscount() throws Exception {
@@ -48,13 +55,16 @@ public class ScannerControllerTest {
         Mockito.when(scannerService.scanWithoutDiscount(inputProducts)).thenReturn("0 aws and 90 clouds");
 
         // Perform GET request
-        mockMvc.perform(get("/api/v1/scanner/scan-without-discount")
+        mockMvc.perform(post("/api/v1/scanner/scan-without-discount")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(asJsonString(inputProducts)))
                 .andExpect(status().isOk());
     }
 
 
+    /**
+     * Test securing successfully sending post request to scan products with 3 for 2 discount only
+     */
     @Test
     @DisplayName("Scan product with 3 for 2 discount only")
     public void scanWith2For3Discount() throws Exception {
@@ -80,12 +90,16 @@ public class ScannerControllerTest {
         Mockito.when(scannerService.scanWith3For2Discount(inputProducts)).thenReturn("1 aws and 70 clouds");
 
         // Perform GET request
-        mockMvc.perform(get("/api/v1/scanner/scan-with-3for2-discount")
+        mockMvc.perform(post("/api/v1/scanner/scan-with-3for2-discount")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(asJsonString(inputProducts)))
                 .andExpect(status().isOk());
     }
 
+
+    /**
+     * Test securing successfully sending post request to scan products with 1 second half price discount only
+     */
     @Test
     @DisplayName("Scan product with 1 second half price discount only")
     public void scanWith1SecondHalfPrice() throws Exception {
@@ -111,12 +125,15 @@ public class ScannerControllerTest {
         Mockito.when(scannerService.scanGet1SecondHalfPrice(inputProducts)).thenReturn("1 aws and 10 clouds");
 
         // Perform GET request
-        mockMvc.perform(get("/api/v1/scanner/scan-get-1-second-half-price")
+        mockMvc.perform(post("/api/v1/scanner/scan-get-1-second-half-price")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(asJsonString(inputProducts)))
                 .andExpect(status().isOk());
     }
 
+    /**
+     * Test securing successfully sending post request to scan products with all discounts
+     */
     @Test
     @DisplayName("Scan product with all discounts")
     public void scanWithAllDiscount() throws Exception {
@@ -162,13 +179,17 @@ public class ScannerControllerTest {
         Mockito.when(scannerService.scanWithAllDiscount(inputProducts)).thenReturn("1 aws and 99 clouds");
 
         // Perform GET request
-        mockMvc.perform(get("/api/v1/scanner/scan-with-all-discount")
+        mockMvc.perform(post("/api/v1/scanner/scan-with-all-discount")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(asJsonString(inputProducts)))
                 .andExpect(status().isOk());
     }
 
-    // Utility method to convert object to JSON string
+    /**
+     * Convert object to json string
+     * @param obj
+     * @return json string
+     */
     private String asJsonString(final Object obj) {
         try {
             return new ObjectMapper().writeValueAsString(obj);

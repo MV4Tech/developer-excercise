@@ -21,12 +21,23 @@ import java.util.Locale;
 public class ScannerServiceImpl implements ScannerService {
     private static final Logger logger = LoggerFactory.getLogger(ScannerServiceImpl.class);
 
+    /**
+     * The discount service
+     */
     private final DiscountService discountService;
+
+    /**
+     * The product service
+     */
     private final ProductService productService;
 
 
 
-    // Scan the products with discount service
+    /**
+     * Scan products with all discounts
+     * @param inputProducts (list of input products)
+     * @return String (bill) of the scanned products formatted with aws and clouds design
+     */
     @Override
     public String scanWithAllDiscount(List<Product> inputProducts) {
             List<Product> supportedProductsByTheSystem = productService.fetchAllProducts();
@@ -55,7 +66,11 @@ public class ScannerServiceImpl implements ScannerService {
             return formatCost(result.doubleValue());
     }
 
-    // Scan the products without discount service
+    /**
+     * Scan products without discount
+     * @param inputProducts (list of input products)
+     * @return String (bill) of the scanned products formatted with aws and clouds design
+     */
     @Override
     public String scanWithoutDiscount(List<Product> inputProducts) {
         // Check if the products are supported by the system
@@ -64,7 +79,11 @@ public class ScannerServiceImpl implements ScannerService {
         return formatCost(sumOfProductsWithoutDiscount(inputProducts));
     }
 
-    // Scan the products with 3 for 2 discount service
+    /**
+     * Scan products with 3 for 2 discount
+     * @param inputProducts  (list of input products)
+     * @return String (bill) of the scanned products formatted with aws and clouds design
+     */
     @Override
     public String scanWith3For2Discount(List<Product> inputProducts) {
         // Check if the products are supported by the system
@@ -84,7 +103,11 @@ public class ScannerServiceImpl implements ScannerService {
     }
 
 
-    // Scan the products with 1 second half price discount service
+   /**
+     * Scan products with 1 second half price discount
+     * @param inputProducts  (list of input products)
+     * @return String (bill) of the scanned products formatted with aws and clouds design
+     */
     @Override
     public String scanGet1SecondHalfPrice(List<Product> inputProducts) {
         // Check if the products are supported by the system
@@ -100,7 +123,11 @@ public class ScannerServiceImpl implements ScannerService {
         return formatCost(result.doubleValue());
     }
 
-    // Format the cost method
+    /**
+     * Format the cost with aws and clouds design
+     * @param cost
+     * @return String formatted cost
+     */
     private String formatCost(double cost) {
         int decimalPlaces = countDecimalPlaces(cost);
         if (decimalPlaces == 2) {
@@ -135,7 +162,12 @@ public class ScannerServiceImpl implements ScannerService {
         }
     }
 
-    // Count the decimal places method
+    /**
+     * Count the decimal places of the number
+     * method made to format the cost with aws and clouds design
+     * @param number
+     * @return int decimal places
+     */
     private int countDecimalPlaces(double number) {
         String[] parts = String.valueOf(number).split("\\.");
         if (parts.length == 2) {
@@ -146,7 +178,11 @@ public class ScannerServiceImpl implements ScannerService {
     }
 
 
-    // Calculate the sum of the products method
+    /**
+     * Sum of products without discount
+     * @param inputProducts (list of input products)
+     * @return double sum of products without discount
+     */
     public double sumOfProductsWithoutDiscount(List<Product> inputProducts) {
         double sum = 0;
         for (Product inputProduct : inputProducts) {
@@ -157,7 +193,13 @@ public class ScannerServiceImpl implements ScannerService {
     }
 
 
-    // Check if the products are supported by the system method
+    /**
+     * Check if the products are supported by the system
+     * @param inputProducts (list of input products)
+     * @param supportedProductsByTheSystem (list of supported products by the system)
+     * if the input product is not supported by the system
+     * Throw ProductNotSupportedByTheSystemException
+     */
     public void isProductSupportedByTheSystem(List<Product> inputProducts, List<Product> supportedProductsByTheSystem) {
 
         for (Product inputProduct : inputProducts) {

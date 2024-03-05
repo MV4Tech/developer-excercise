@@ -15,10 +15,17 @@ import java.util.Map;
 @Service
 @RequiredArgsConstructor
 public class DiscountServiceImpl  implements DiscountService {
+    /**
+     * The logger for the DiscountServiceImpl class
+     */
     private static final Logger logger = LoggerFactory.getLogger(DiscountServiceImpl.class);
 
 
-    // Calculate the cost of 3 for 2 discount
+    /**
+     * Calculate the discount cost of 3 for 2 discount
+     * @param inputProducts
+     * @return return discount cost of 3 for 2
+     */
     @Override
     public double calculate3For2Discount(List<Product> inputProducts) {
         logger.info("I am in 3 for 2");
@@ -28,7 +35,11 @@ public class DiscountServiceImpl  implements DiscountService {
         return cost/100;
     }
 
-    // Calculate the cost of 1 second half price discount
+    /**
+     * Calculate the discount cost of 1 second half price discount
+     * @param inputProducts
+     * @return return discount cost of 1 second half price
+     */
     @Override
     public double calculate1SecondHalfPriceDiscount(List<Product> inputProducts) {
         Map<String, Integer> productCounts = new HashMap<>(); // Map to store product counts
@@ -51,9 +62,12 @@ public class DiscountServiceImpl  implements DiscountService {
         return totalDiscount/100;
     }
 
-
-    // calculate the cost of 1 second half price after 3 for 2 discount
-    // inputProducts list must start after 3rd product
+    /**
+     * Calculate the discount cost for buy 1 get second half price after 3 for 2 discount
+     * list starts from 3rd product
+     * @param inputProducts
+     * @return return discount cost 1 second half price for all discounts
+     */
     public double calculate1SecondHalfPriceDiscountForAllDiscounts(List<Product> inputProducts) {
 
         List<Product> listOfProductsAfter2for3 = inputProducts.subList(3,inputProducts.size());
@@ -79,7 +93,11 @@ public class DiscountServiceImpl  implements DiscountService {
     }
 
 
-    // Calculate the cost with all discounts
+    /**
+     * Calculate the discount cost of 3 for 2 discount and 1 second half price discount
+     * @param inputProducts
+     * @return return discount cost of 3 for 2 and 1 second half price
+     */
     @Override
     public double calculateWithAllDiscount(List<Product> inputProducts) {
             double costDiscount3for2 = calculate3For2Discount(inputProducts);

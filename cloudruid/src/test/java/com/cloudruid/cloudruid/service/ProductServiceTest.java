@@ -22,17 +22,30 @@ import static org.mockito.Mockito.when;
 @SpringBootTest
 public class ProductServiceTest {
 
+    /**
+     * The product service
+     */
     private ProductService productService;
 
+    /**
+     * The product repository
+     */
     @Mock
     private ProductRepository productRepository;
 
+    /**
+     * Open mock annotations before each test
+     * Before each test initialize product service with implementation of ProductServiceImpl
+     */
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
         productService = new ProductServiceImpl(productRepository);
     }
 
+    /**
+     * Test successfully adding product to the database
+     */
     @Test
     @DisplayName("Add product to the database")
     public void should_successfully_add_product() {
@@ -51,7 +64,9 @@ public class ProductServiceTest {
         verify(productRepository).save(product);
     }
 
-
+    /**
+     * Test successfully fetching all products from the database
+     */
     @Test
     @DisplayName("Fetch all products from the database")
     public void should_successfully_fetch_all_products() {
@@ -77,6 +92,9 @@ public class ProductServiceTest {
         Mockito.verify(productRepository, Mockito.times(1)).findAll();
     }
 
+    /**
+     * Test successfully fetching product by id from the database
+     */
     @Test
     @DisplayName("Fetch product by id from the database")
     public void should_successfully_fetch_product_by_id() {
@@ -98,6 +116,9 @@ public class ProductServiceTest {
         Mockito.verify(productRepository, Mockito.times(1)).findById(1L);
     }
 
+    /**
+     * Test successfully deleting product by id from the database
+     */
     @Test
     @DisplayName("Delete product by id from the database")
     public void should_successfully_delete_product_by_id() {

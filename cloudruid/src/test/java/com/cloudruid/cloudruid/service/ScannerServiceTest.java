@@ -17,14 +17,26 @@ import java.util.List;
 @SpringBootTest
 public class ScannerServiceTest {
 
+        /**
+         * The scanner service
+         */
         private ScannerService scannerService;
 
+        /**
+         * The discount service
+         */
         @MockBean
         private DiscountService discountService;
 
+        /**
+         * The product service
+         */
         @MockBean
         private ProductService productService;
 
+        /**
+         * Test if the product is supported by the system
+         */
         @Test
         @DisplayName("Product Supported by the system test(Scanner Service)")
         public void should_successfully_product_supported_by_the_system() {
@@ -46,6 +58,9 @@ public class ScannerServiceTest {
             Assertions.assertDoesNotThrow(() -> scannerService.isProductSupportedByTheSystem(inputProducts, supportedProductsByTheSystem));
         }
 
+        /**
+         * Test if product is not supported by the system
+         */
         @Test
         @DisplayName("Product Not Supported by the system test(Scanner Service)")
         public void should_throw_exception_when_product_not_supported_by_the_system() {
@@ -70,6 +85,9 @@ public class ScannerServiceTest {
             });
         }
 
+        /**
+         * Test successfully summing products without discount
+         */
         @Test
         @DisplayName("Scan with no discounts test(Scanner Service)")
         public void should_successfully_scan_with_no_discounts() {
@@ -103,6 +121,9 @@ public class ScannerServiceTest {
         }
 
 
+        /**
+         * Test successfully summing products with 3 for 2 discount
+         */
         @Test
         @DisplayName("Scan with 3 for 2 discount test(Scanner Service)")
         public void should_successfully_scan_with_3_for_2_discount() {
@@ -135,6 +156,9 @@ public class ScannerServiceTest {
             Assertions.assertEquals("0 aws and 50 clouds", result);
         }
 
+        /**
+         * Test successfully summing products with 1 second half price discount
+         */
         @Test
         @DisplayName("Scan with 1 second half price discount test(Scanner Service)")
         public void should_successfully_scan_with_1_second_half_price_discount() {
@@ -167,6 +191,9 @@ public class ScannerServiceTest {
             Assertions.assertEquals("4 aws and 60 clouds", result);
         }
 
+        /**
+         * Test successfully summing products with all discounts
+         */
         @Test
         @DisplayName("Scan with all discounts test(Scanner Service)")
         public void should_successfully_scan_with_all_discounts() {

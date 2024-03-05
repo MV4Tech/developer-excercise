@@ -16,16 +16,30 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
 
+    /**
+     * The logger for the ProductServiceImpl class
+     */
     private static final Logger logger = LoggerFactory.getLogger(ProductServiceImpl.class);
+
+    /**
+     * The product repository
+     */
     private final ProductRepository productRepository;
 
-    // Add product to the database
+    /**
+     * Add product to the database
+     * @param product
+     */
     @Override
     public void addProduct(Product product) {
         productRepository.save(product);
         logger.info("Product added successfully");
     }
 
+    /**
+     * Fetch all products from the database
+     * @return List of products if empty throw ProductNotFoundException
+     */
     @Override
     public List<Product> fetchAllProducts() {
         List<Product> products = productRepository.findAll();
@@ -36,6 +50,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
 
+    /**
+     * Fetch product by id from the database
+     * @param id
+     * @return Product , if not found throw ProductNotFoundException
+     */
     @Override
     public Product getProductById(Long id) {
         Optional<Product> OptionalProduct = productRepository.findById(id);
@@ -47,6 +66,10 @@ public class ProductServiceImpl implements ProductService {
 
     }
 
+    /**
+     * Delete product from the database
+     * @param id
+     */
     @Override
     public void deleteProduct(Long id) {
         Product product = getProductById(id);

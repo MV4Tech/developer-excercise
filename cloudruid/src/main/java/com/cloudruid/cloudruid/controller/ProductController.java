@@ -3,6 +3,8 @@ package com.cloudruid.cloudruid.controller;
 
 import com.cloudruid.cloudruid.model.Product;
 import com.cloudruid.cloudruid.service.ProductService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -17,6 +19,15 @@ public class ProductController {
 
     private final ProductService productService;
 
+    /**
+     * Add product to the database
+     * @param product
+     * @return HttpStatus 201
+     */
+    @Operation(
+            description = "Add product to the database",
+            summary = "This is a summary for adding product to the database"
+    )
     @PostMapping("/add-product")
     public ResponseEntity<Void> addProduct(@RequestBody @Valid Product product) {
         productService.addProduct(product);
@@ -24,6 +35,15 @@ public class ProductController {
     }
 
 
+    /**
+     * Delete product from the database
+     * @param id
+     * @return HttpStatus 204(no content)
+     */
+    @Operation(
+            description = "Delete product from the database",
+            summary = "This is a summary for deleting product from the database"
+    )
     @DeleteMapping("/delete-product/{id}")
     public ResponseEntity<Void> deleteProduct(@PathVariable Long id) {
         productService.deleteProduct(id);

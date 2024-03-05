@@ -17,14 +17,23 @@ import lombok.NoArgsConstructor;
 @Table(name = "product")
 public class Product {
 
+    /**
+     * Product id
+     */
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    /**
+     * Product name
+     */
     @Column
     @NotBlank(message = "Name is mandatory")
     private String name;
 
+    /**
+     * Product price (called cloud)
+     */
     @Column
     @NotNull(message = "Price cannot be null")
     @Min(value = 0, message = "Price cannot be negative")

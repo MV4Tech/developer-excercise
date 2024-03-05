@@ -13,13 +13,22 @@ import java.util.List;
 @SpringBootTest
 public class DiscountServiceTest {
 
+    /**
+     * The discount service
+     */
     private DiscountService discountService;
 
+    /**
+     * Before each test initialize discount service with implementation of DiscountServiceImpl
+     */
     @BeforeEach
     void setUp() {
         discountService = new DiscountServiceImpl();
     }
 
+    /**
+     * Test successfully calculating 3 for 2 discount with 2 products as input
+     */
     @Test
     @DisplayName("Calculate 3 for 2 discount with 3 products as input")
     public void should_successfully_calculate_3_for_2_discount_with_3_products_as_input() {
@@ -48,6 +57,9 @@ public class DiscountServiceTest {
 
     }
 
+    /**
+     * Test successfully calculating 3 for 2 discount with more than 3 products as input
+     */
     @Test
     @DisplayName("Calculate 3 for 2 discount with more than 3 products as input")
     public void should_successfully_calculate_3_for_2_discount_with_more_than_3_products_as_input() {
@@ -91,6 +103,9 @@ public class DiscountServiceTest {
 
     }
 
+    /**
+     * Test successfully calculating 1 second half price discount with 2 products as input
+     */
     @Test
     @DisplayName("Calculate 1 second half price discount with 2 products as input")
     public void should_successfully_calculate_1_second_half_price_discount_with_2_products_as_input() {
@@ -114,6 +129,9 @@ public class DiscountServiceTest {
 
     }
 
+    /**
+     * Calculate 1 second half price discount with more than 2 products as input
+     */
     @Test
     @DisplayName("Calculate 1 second half price discount with more than 2 products as input")
     public void should_successfully_calculate_1_second_half_price_discount_with_more_than_2_products_as_input() {
@@ -147,6 +165,9 @@ public class DiscountServiceTest {
 
     }
 
+    /**
+     * Test successfully calculating 1 second half price discount for all Discounts
+     */
     @Test
     @DisplayName("Calculate 1 second half price discount for all Discounts")
     public void should_successfully_calculate_1_second_half_price_discount_for_all_Discounts(){
@@ -192,6 +213,9 @@ public class DiscountServiceTest {
 
     }
 
+    /**
+     * Test successfully calculating with all discounts
+     */
     @Test
     @DisplayName("Calculate with all discounts")
     public void should_successfully_calculate_with_all_discounts() {
