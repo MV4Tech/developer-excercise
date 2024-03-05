@@ -20,6 +20,7 @@ import java.util.Locale;
 @RequiredArgsConstructor
 public class ScannerServiceImpl implements ScannerService {
     private static final Logger logger = LoggerFactory.getLogger(ScannerServiceImpl.class);
+
     private final DiscountService discountService;
     private final ProductService productService;
 
@@ -74,8 +75,11 @@ public class ScannerServiceImpl implements ScannerService {
         }
         double cost = sumOfProductsWithoutDiscount(inputProducts);
         BigDecimal costBigDecimal = new BigDecimal(Double.toString(cost));
+        logger.info("Cost: " + costBigDecimal);
         BigDecimal discountBigDecimal = new BigDecimal(Double.toString(discountService.calculate3For2Discount(inputProducts)));
+        logger.info("Discount: " + discountBigDecimal);
         BigDecimal result = costBigDecimal.subtract(discountBigDecimal);
+        logger.info("Result: " + result);
         return formatCost(result.doubleValue());
     }
 
@@ -143,7 +147,7 @@ public class ScannerServiceImpl implements ScannerService {
 
 
     // Calculate the sum of the products method
-    private double sumOfProductsWithoutDiscount(List<Product> inputProducts) {
+    public double sumOfProductsWithoutDiscount(List<Product> inputProducts) {
         double sum = 0;
         for (Product inputProduct : inputProducts) {
             sum += inputProduct.getCloud();
@@ -154,7 +158,7 @@ public class ScannerServiceImpl implements ScannerService {
 
 
     // Check if the products are supported by the system method
-    private void isProductSupportedByTheSystem(List<Product> inputProducts, List<Product> supportedProductsByTheSystem) {
+    public void isProductSupportedByTheSystem(List<Product> inputProducts, List<Product> supportedProductsByTheSystem) {
 
         for (Product inputProduct : inputProducts) {
             boolean isSupported = false;

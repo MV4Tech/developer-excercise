@@ -14,4 +14,7 @@ public interface ScannerService {
     String scanWith3For2Discount(List<Product> inputProducts);
 
     String scanGet1SecondHalfPrice(List<Product> inputProducts);
+     void isProductSupportedByTheSystem(List<Product> inputProducts, List<Product> supportedProductsByTheSystem);
+
+    public double sumOfProductsWithoutDiscount(List<Product> inputProducts);
 }

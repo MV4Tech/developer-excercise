@@ -18,17 +18,17 @@ public class DiscountServiceImpl  implements DiscountService {
     private static final Logger logger = LoggerFactory.getLogger(DiscountServiceImpl.class);
 
 
+    // Calculate the cost of 3 for 2 discount
     @Override
     public double calculate3For2Discount(List<Product> inputProducts) {
+        logger.info("I am in 3 for 2");
         List<Product> productsForDiscount = inputProducts.subList(0, 3);
-        logger.info("Products for 3 for 2 discount: " + productsForDiscount);
         productsForDiscount.sort(Comparator.comparing(Product::getCloud));
-        logger.info("Products for 3 for 2 discount sorted: " + productsForDiscount);
         double cost = productsForDiscount.get(0).getCloud();
-        logger.info("Cost of the product with the lowest price: " + cost);
         return cost/100;
     }
 
+    // Calculate the cost of 1 second half price discount
     @Override
     public double calculate1SecondHalfPriceDiscount(List<Product> inputProducts) {
         Map<String, Integer> productCounts = new HashMap<>(); // Map to store product counts
@@ -47,7 +47,7 @@ public class DiscountServiceImpl  implements DiscountService {
                 totalDiscount += cloud / 2.0;
             }
         }
-        logger.info("Total discount for 1 second half price discount: " + totalDiscount);
+
         return totalDiscount/100;
     }
 
@@ -74,7 +74,7 @@ public class DiscountServiceImpl  implements DiscountService {
                 totalDiscount += cloud / 2.0;
             }
         }
-        logger.info("Total discount for 1 second half price discount: " + totalDiscount);
+
         return totalDiscount/100;
     }
 
@@ -83,10 +83,7 @@ public class DiscountServiceImpl  implements DiscountService {
     @Override
     public double calculateWithAllDiscount(List<Product> inputProducts) {
             double costDiscount3for2 = calculate3For2Discount(inputProducts);
-            logger.info("---Cost for 3 for 2 discount: " + costDiscount3for2);
             double costDiscount1SecondHalfPrice = calculate1SecondHalfPriceDiscountForAllDiscounts(inputProducts);
-            logger.info("---Cost for 1 second half price discount: " + costDiscount1SecondHalfPrice);
-            logger.info("---Total cost for all discounts: " + costDiscount3for2 + costDiscount1SecondHalfPrice);
             return costDiscount3for2 + costDiscount1SecondHalfPrice;
     }
 }

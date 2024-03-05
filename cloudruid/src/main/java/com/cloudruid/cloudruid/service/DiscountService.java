@@ -11,4 +11,5 @@ public interface DiscountService {
     double calculate1SecondHalfPriceDiscount(List<Product> inputProducts);
 
     double calculateWithAllDiscount(List<Product> inputProducts);
+    public double calculate1SecondHalfPriceDiscountForAllDiscounts(List<Product> inputProducts);
 }
