@@ -20,4 +20,9 @@ a numeric bill at the end. It includes logic for special deals such as "2 for 3"
 1. Create mysql db schema in your localhost and call it: shop_db
 2. Also in src/main/resources/application.yml change username and password under datasource and flyway
 3. Launch Project and let flyway do its work
-   
+
+## Development
+1. This project was developed using [Java/Spring Boot/MySQL] and [REST/HTTP API].
+2. MVC (Model-View-Controller) architectural pattern.
+3. Unit tests were implemented using [JUnit 5] and [Mockito] for testing various functionalities.
+4. Code is organized into modules for better modularity and reusability.
