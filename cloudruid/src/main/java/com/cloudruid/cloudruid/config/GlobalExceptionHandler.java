@@ -58,12 +58,28 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(getErrorsMap(errors), new HttpHeaders(), HttpStatus.BAD_REQUEST);
     }
 
+    // This method is used to handle the general exceptions
+    @ExceptionHandler(Exception.class)
+    public final ResponseEntity<Map<String, List<String>>> handleGenerealException(Exception ex){
+        List<String> errors = Collections.singletonList(ex.getMessage());
+        return new ResponseEntity<>(getErrorsMap(errors), new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 
-    /**
-     * method to create a map of errors
-     * @param errors
-     * @return map of errors
-     */
+
+
+        // This method is used to handle the runtime exceptions
+        @ExceptionHandler(RuntimeException.class)
+        public ResponseEntity<Map<String,List<String>>> handleRunetimeException(RuntimeException ex){
+            List<String> errors = Collections.singletonList(ex.getMessage());
+            return new ResponseEntity<>(getErrorsMap(errors), new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+
+        /**
+         * method to create a map of errors
+         * @param errors
+         * @return map of errors
+         */
     private Map<String,List<String>> getErrorsMap(List<String> errors) {
         Map<String,List<String>> errorResponse = new HashMap<>();
         errorResponse.put("errors",errors);

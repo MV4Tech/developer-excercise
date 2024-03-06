@@ -14,6 +14,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/scanner")
+@CrossOrigin(origins = "http://localhost:5173")
 public class ScannerController {
 
     private final ScannerService scannerService;

@@ -11,9 +11,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/product")
+@CrossOrigin(origins = "http://localhost:5173")
 public class ProductController {
 
 
@@ -32,6 +35,19 @@ public class ProductController {
     public ResponseEntity<Void> addProduct(@RequestBody @Valid Product product) {
         productService.addProduct(product);
         return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    /**
+     * Fetch all products from the database
+     * @return List of products
+     */
+    @Operation(
+            description = "Fetch all products from the database",
+            summary = "This is a summary for fetching all products from the database"
+    )
+    @GetMapping("/fetch-all-products")
+    public ResponseEntity<List<Product>> fetchAllProducts() {
+        return ResponseEntity.ok(productService.fetchAllProducts());
     }
 
 

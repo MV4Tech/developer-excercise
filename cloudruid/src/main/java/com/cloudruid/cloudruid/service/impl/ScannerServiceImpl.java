@@ -63,6 +63,7 @@ public class ScannerServiceImpl implements ScannerService {
             BigDecimal costBigDecimal = new BigDecimal(Double.toString(cost));
             BigDecimal discountBigDecimal = new BigDecimal(Double.toString(discountService.calculateWithAllDiscount(inputProducts)));
             BigDecimal result = costBigDecimal.subtract(discountBigDecimal);
+            logger.info("Result: " + result);
             return formatCost(result.doubleValue());
     }
 
@@ -76,6 +77,7 @@ public class ScannerServiceImpl implements ScannerService {
         // Check if the products are supported by the system
         List<Product> supportedProductsByTheSystem = productService.fetchAllProducts();
         isProductSupportedByTheSystem(inputProducts, supportedProductsByTheSystem);
+        logger.info("bill: " + formatCost(sumOfProductsWithoutDiscount(inputProducts)));
         return formatCost(sumOfProductsWithoutDiscount(inputProducts));
     }
 
@@ -131,7 +133,7 @@ public class ScannerServiceImpl implements ScannerService {
     private String formatCost(double cost) {
         int decimalPlaces = countDecimalPlaces(cost);
         if (decimalPlaces == 2) {
-
+            logger.info("Iam here at decimalPlaces ==2  ");
             DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.ENGLISH);
             symbols.setDecimalSeparator('.');
             DecimalFormat decimalFormat = new DecimalFormat("#.##", symbols);
@@ -143,17 +145,20 @@ public class ScannerServiceImpl implements ScannerService {
             symbols.setDecimalSeparator('.');
             DecimalFormat decimalFormat = new DecimalFormat("#.##", symbols);
             String formattedCost = decimalFormat.format(cost);
-
+            logger.info("Iam here at decimalPlaces ==1 ");
             // Split the formattedCost into integer and fractional parts
             String[] parts = formattedCost.split("\\.");
             if(parts.length != 2){
-                return formattedCost.replace(".", " aws and ") + " clouds";
+                logger.info("Iam here at length!=2 ");
+                int integerPart = Integer.parseInt(parts[0]);
+                return integerPart + " aws and " + 00 + " clouds";
             }
             int integerPart = Integer.parseInt(parts[0]);
             int fractionalPart = Integer.parseInt(parts[1]);
 
             return integerPart + " aws and " + (fractionalPart * 10) + " clouds";
         } else {
+            logger.info("I am at else ");
             DecimalFormatSymbols symbols = new DecimalFormatSymbols(Locale.ENGLISH);
             symbols.setDecimalSeparator('.');
             DecimalFormat decimalFormat = new DecimalFormat("#.##", symbols);
