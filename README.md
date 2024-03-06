@@ -28,4 +28,6 @@ a numeric bill at the end. It includes logic for special deals such as "2 for 3"
 2. MVC (Model-View-Controller) architectural pattern.
 3. Unit tests were implemented using [JUnit 5] and [Mockito] for testing various functionalities.
 4. Swagger, OpenApi
-5. Code is organized into modules for better modularity and reusability.
+5. React Vite
+6. Bootstrap
+7. Code is organized into modules for better modularity and reusability.
