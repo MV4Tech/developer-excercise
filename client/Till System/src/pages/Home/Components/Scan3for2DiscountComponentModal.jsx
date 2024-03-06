@@ -82,7 +82,7 @@ const Scan3for2DiscountComponentModal = () => {
       aria-labelledby='example-modal-sizes-title-lg'
     >
       <Modal.Header closeButton>
-        <Modal.Title id='example-modal-sizes-title-lg'>Scan without discount</Modal.Title>
+        <Modal.Title id='example-modal-sizes-title-lg'>Scan 3 for 2 discount</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <Form>
