@@ -1,0 +1,24 @@
+.product-table {
+    margin: 20px;
+  }
+  
+  .product-table table {
+    width: 100%;
+  }
+  
+  .product-table thead {
+    background-color: #f8f9fa;
+  }
+  
+  .product-table th {
+    text-align: center;
+  }
+  
+  .product-table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  .product-table tbody tr:hover {
+    background-color: #e9ecef;
+  }
+  
